@@ -2,7 +2,7 @@
 
 Download your accepted submissions and questions from LeetCode!
 
-This repo refers to [yangshun/leetcode-downloader](https://github.com/yangshun/leetcode-downloader).
+This repo refers to [noootown/leetcode-downloader](https://github.com/noootown/leetcode-downloader) with some fixes, graphql endpoint update and eslint.
 
 ## Start
 
@@ -19,14 +19,16 @@ Do the following steps to get your cookie at LeetCode
 
 ![GitHub Logo](./cookie.png)
 
+(Note: need to escape if there is double quote " in cookie)
+
 ```
-# fetch the latest accepted submission of each question
+# fetch the latest accepted submission of each question to folder submission
 $ node fetchSubmission.js
 
-# fetch the description of each question
+# fetch the description of each question to folder problem
 $ node fetchQuestion.js
 
-# merge questions and accepted submissions
+# merge questions and accepted submissions to leetcode.txt
 $ node mergeQA.js
 ```
 

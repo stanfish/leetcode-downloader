@@ -1,15 +1,18 @@
-const axios = require('axios')
-const cheerio = require('cheerio')
-const s = require('underscore.string')
+/* eslint-disable import/no-unresolved */
+
+
+const axios = require('axios');
+const cheerio = require('cheerio');
+const s = require('underscore.string');
 const {
   cookie,
-} = require('./config.json')
+} = require('./config.json');
 
 const numberPadZero = (number, zeroNum) => `${'0'.repeat(zeroNum - number.toString().length)}${number}`;
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const request = (header) => axios.request(
+const request = header => axios.request(
   {
     ...{
       method: 'get',
@@ -18,16 +21,16 @@ const request = (header) => axios.request(
       },
     },
     ...header,
-  }
-).catch(err => {
-  console.log(err)
-})
+  },
+).catch((err) => {
+  console.log(err);
+});
 
-const parseXpath = (xml, xpath, attr) => s.unescapeHTML(cheerio.load(xml)(xpath).attr(attr))
+const parseXpath = (xml, xpath, attr) => s.unescapeHTML(cheerio.load(xml)(xpath).attr(attr));
 
 module.exports = {
   numberPadZero,
   sleep,
   request,
   parseXpath,
-}
+};
