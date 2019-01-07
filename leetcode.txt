@@ -1,0 +1,1416 @@
+
+Question 0001:
+<p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they add up to a specific target.</p>
+
+<p>You may assume that each input would have <strong><em>exactly</em></strong> one solution, and you may not use the <em>same</em> element twice.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre>
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[<strong>0</strong>] + nums[<strong>1</strong>] = 2 + 7 = 9,
+return [<strong>0</strong>, <strong>1</strong>].
+</pre>
+
+<p>&nbsp;</p>
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    var result=[];
+    nums.forEach(function(num,ind){
+       nums.slice(1+ind).forEach(function(num2,ind2){
+           if (num+num2 === target) {
+               result=[ind,ind2+ind+1];
+           }
+       }); 
+    });
+    return result;
+};
+
+--------------------------------------------
+Question 0002:
+<p>You are given two <b>non-empty</b> linked lists representing two non-negative integers. The digits are stored in <b>reverse order</b> and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+
+<p><b>Example:</b></p>
+
+<pre>
+<b>Input:</b> (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+<b>Output:</b> 7 -&gt; 0 -&gt; 8
+<b>Explanation:</b> 342 + 465 = 807.
+</pre>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+    
+    var tempL1 = l1;
+    var tempL2 = l2;
+    var l3, tempL3;
+    var carry = false;
+    while (tempL1 !== null || tempL2 !== null){
+        
+        var val1 = tempL1 === null ? 0 : tempL1.val;
+        if (tempL1 !== null ){
+            tempL1 = tempL1.next;
+        }
+        
+        var val2 = tempL2 === null ? 0 : tempL2.val;
+        if (tempL2 !== null ){
+            tempL2 = tempL2.next;
+        }
+        
+        var val3 = val1 + val2 + (carry ? 1 : 0);
+        if (val3 >= 10) {
+            val3 -= 10;
+            carry = true;
+        } else {
+            carry = false;
+        }
+        
+        var newNode = new ListNode(val3);
+        
+        if (!l3) {
+            l3 = newNode;
+            tempL3 = l3;
+        } else {
+            tempL3.next = newNode;
+            tempL3 = newNode;
+        }
+        
+    }
+    
+    if (carry){
+        tempL3.next = new ListNode(1);
+    }
+    
+
+    return l3;
+    
+};
+
+--------------------------------------------
+Question 0006:
+<p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
+
+<pre>
+P   A   H   N
+A P L S I I G
+Y   I   R
+</pre>
+
+<p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
+
+<p>Write the code that will take a string and make this conversion given a number of rows:</p>
+
+<pre>
+string convert(string s, int numRows);</pre>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;PAYPALISHIRING&quot;, numRows = 3
+<strong>Output:</strong> &quot;PAHNAPLSIIGYIR&quot;
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;PAYPALISHIRING&quot;, numRows =&nbsp;4
+<strong>Output:</strong>&nbsp;&quot;PINALSIGYAHRPI&quot;
+<strong>Explanation:</strong>
+
+P     I    N
+A   L S  I G
+Y A   H R
+P     I</pre>
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function(s, numRows) {
+    if (numRows === 1) {
+        return s;
+    }
+    var rows = [];
+    for (var i=0; i<numRows; i++) {
+        rows.push('');
+    }
+    var j=0;
+    var down = true;
+    
+    for (var k=0; k<s.length;k++){
+        var c = s.charAt(k);
+    //s.split('').forEach(c=>{
+       if (down && j<numRows){
+           rows[j]+=c;            
+           j++;
+       } 
+       else if (down && j==numRows) {
+           j-=2;
+           down = false;
+           rows[j]+=c;    
+           if (j===0){
+               down=true;
+               j++;
+           } else {j--};
+       }
+        else if (!down && j>0){
+            rows[j]+=c;     
+            j--;
+        }
+        else if (!down && j==0){
+            rows[j]+=c;    
+            j++;
+            down=true;
+        }
+        
+    }
+    
+    
+    var reSt='';
+    rows.forEach(row=>{
+       reSt += row; 
+    });
+    
+    return reSt;
+    
+};
+
+--------------------------------------------
+Question 0007:
+<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> 123
+<strong>Output:</strong> 321
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> -123
+<strong>Output:</strong> -321
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> 120
+<strong>Output:</strong> 21
+</pre>
+
+<p><strong>Note:</strong><br />
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [&minus;2<sup>31</sup>,&nbsp; 2<sup>31&nbsp;</sup>&minus; 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+    let sign=1;
+    if (x<0){
+        sign=-1;
+        x*=-1;
+    }
+    var result='';
+    for(var i=0;i<(x+'').length;i++){
+        result=(x+'').substr(i,1)+result;
+    }
+    
+    return sign*(parseInt(result)>2147483648?0:parseInt(result));
+};
+
+--------------------------------------------
+Question 0008:
+<p>Implement <code><span>atoi</span></code> which&nbsp;converts a string to an integer.</p>
+
+<p>The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.</p>
+
+<p>The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.</p>
+
+<p>If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.</p>
+
+<p>If no valid conversion could be performed, a zero value is returned.</p>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+	<li>Only the space character <code>&#39; &#39;</code> is considered as whitespace character.</li>
+	<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [&minus;2<sup>31</sup>,&nbsp; 2<sup>31&nbsp;</sup>&minus; 1]. If the numerical value is out of the range of representable values, INT_MAX (2<sup>31&nbsp;</sup>&minus; 1) or INT_MIN (&minus;2<sup>31</sup>) is returned.</li>
+</ul>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;42&quot;
+<strong>Output:</strong> 42
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;   -42&quot;
+<strong>Output:</strong> -42
+<strong>Explanation:</strong> The first non-whitespace character is &#39;-&#39;, which is the minus sign.
+&nbsp;            Then take as many numerical digits as possible, which gets 42.
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;4193 with words&quot;
+<strong>Output:</strong> 4193
+<strong>Explanation:</strong> Conversion stops at digit &#39;3&#39; as the next character is not a numerical digit.
+</pre>
+
+<p><strong>Example 4:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;words and 987&quot;
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> The first non-whitespace character is &#39;w&#39;, which is not a numerical 
+&nbsp;            digit or a +/- sign. Therefore no valid conversion could be performed.</pre>
+
+<p><strong>Example 5:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;-91283472332&quot;
+<strong>Output:</strong> -2147483648
+<strong>Explanation:</strong> The number &quot;-91283472332&quot; is out of the range of a 32-bit signed integer.
+&nbsp;            Thefore INT_MIN (&minus;2<sup>31</sup>) is returned.</pre>
+/**
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+    
+    var reVal = parseInt(str);
+    
+    if (isNaN(reVal)) {
+        reVal=0;
+    }
+    
+    var maxVal = Math.pow(2,31) - 1;
+    var minVal = -1 * (maxVal+1);
+    
+    
+    reVal = Math.max(reVal, minVal);
+    reVal = Math.min(reVal, maxVal);
+
+    
+    return reVal;
+};
+
+--------------------------------------------
+Question 0009:
+<p>Determine whether an integer is a palindrome. An integer&nbsp;is&nbsp;a&nbsp;palindrome when it&nbsp;reads the same backward as forward.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> 121
+<strong>Output:</strong> true
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> -121
+<strong>Output:</strong> false
+<strong>Explanation:</strong> From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> 10
+<strong>Output:</strong> false
+<strong>Explanation:</strong> Reads 01 from right to left. Therefore it is not a palindrome.
+</pre>
+
+<p><strong>Follow up:</strong></p>
+
+<p>Coud you solve&nbsp;it without converting the integer to a string?</p>
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    if (x<0) {return false;}
+    else if (x===0){return true;}
+    else {
+        var xStr = ''+x;
+        var xArr = xStr.split('');
+        var rStr = xArr.reverse().join('');
+        return xStr === rStr;
+    }
+};
+
+--------------------------------------------
+Question 0011:
+<p>Given <i>n</i> non-negative integers <i>a<sub>1</sub></i>, <i>a<sub>2</sub></i>, ..., <i>a<sub>n&nbsp;</sub></i>, where each represents a point at coordinate (<i>i</i>, <i>a<sub>i</sub></i>). <i>n</i> vertical lines are drawn such that the two endpoints of line <i>i</i> is at (<i>i</i>, <i>a<sub>i</sub></i>) and (<i>i</i>, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
+
+<p><strong>Note:&nbsp;</strong>You may not slant the container and <i>n</i> is at least 2.</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="" src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/07/17/question_11.jpg" style="width: 600px; height: 287px;" /></p>
+
+<p><small>The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain&nbsp;is 49. </small></p>
+
+<p>&nbsp;</p>
+
+<p><strong>Example:</strong></p>
+
+<pre>
+<strong>Input:</strong> [1,8,6,2,5,4,8,3,7]
+<strong>Output:</strong> 49</pre>
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+// var maxArea = function(height) {
+    
+//     let reVal = 0;
+//     height.every((h,i)=>{      
+
+//         if ((height.length-1-i) * h > reVal) {
+//             let maxA = 0;
+//             for (var j=i+1; j<height.length; j++){
+//                 let area = (j-i) * Math.min(h,height[j]);
+//                 maxA = Math.max(maxA, area);
+//             }
+
+//             reVal = Math.max(maxA, reVal); 
+            
+//         }
+//         return true;
+        
+//     });
+//     return reVal;
+// };
+var maxArea = function(height) {
+    if (height.length<2){
+        return 0;
+    }
+    
+    let left = 0;
+    let right = height.length-1;
+    
+    let maxA = 0;
+    
+    while(left<right) {
+        
+        let diff = right - left;
+        let area = diff * Math.min(height[left], height[right]); 
+        maxA = Math.max(area, maxA);
+    
+        if (height[left]<height[right]) {
+            left++;
+        } else {
+            right--;
+        }
+          
+          
+    }
+    
+    return maxA;
+    
+    
+};
+
+--------------------------------------------
+Question 0012:
+<p>Roman numerals are represented by seven different symbols:&nbsp;<code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p>
+
+<pre>
+<strong>Symbol</strong>       <strong>Value</strong>
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000</pre>
+
+<p>For example,&nbsp;two is written as <code>II</code>&nbsp;in Roman numeral, just two one&#39;s added together. Twelve is written as, <code>XII</code>, which is simply <code>X</code> + <code>II</code>. The number twenty seven is written as <code>XXVII</code>, which is <code>XX</code> + <code>V</code> + <code>II</code>.</p>
+
+<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p>
+
+<ul>
+	<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9.&nbsp;</li>
+	<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90.&nbsp;</li>
+	<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
+</ul>
+
+<p>Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;3
+<strong>Output:</strong> &quot;III&quot;</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;4
+<strong>Output:</strong> &quot;IV&quot;</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;9
+<strong>Output:</strong> &quot;IX&quot;</pre>
+
+<p><strong>Example 4:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;58
+<strong>Output:</strong> &quot;LVIII&quot;
+<strong>Explanation:</strong> L = 50, V = 5, III = 3.
+</pre>
+
+<p><strong>Example 5:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;1994
+<strong>Output:</strong> &quot;MCMXCIV&quot;
+<strong>Explanation:</strong> M = 1000, CM = 900, XC = 90 and IV = 4.</pre>
+/**
+ * @param {number} num
+ * @return {string}
+ */
+var intToRoman = function(num) {
+var roman = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+  };
+  var str = '';
+
+  for (var i of Object.keys(roman)) {
+    var q = Math.floor(num / roman[i]);
+    num -= q * roman[i];
+    str += i.repeat(q);
+  }
+
+  return str;
+};
+
+--------------------------------------------
+Question 0013:
+<p>Roman numerals are represented by seven different symbols:&nbsp;<code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p>
+
+<pre>
+<strong>Symbol</strong>       <strong>Value</strong>
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000</pre>
+
+<p>For example,&nbsp;two is written as <code>II</code>&nbsp;in Roman numeral, just two one&#39;s added together. Twelve is written as, <code>XII</code>, which is simply <code>X</code> + <code>II</code>. The number twenty seven is written as <code>XXVII</code>, which is <code>XX</code> + <code>V</code> + <code>II</code>.</p>
+
+<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p>
+
+<ul>
+	<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9.&nbsp;</li>
+	<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90.&nbsp;</li>
+	<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
+</ul>
+
+<p>Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;&quot;III&quot;
+<strong>Output:</strong> 3</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;&quot;IV&quot;
+<strong>Output:</strong> 4</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;&quot;IX&quot;
+<strong>Output:</strong> 9</pre>
+
+<p><strong>Example 4:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;&quot;LVIII&quot;
+<strong>Output:</strong> 58
+<strong>Explanation:</strong> L = 50, V= 5, III = 3.
+</pre>
+
+<p><strong>Example 5:</strong></p>
+
+<pre>
+<strong>Input:</strong>&nbsp;&quot;MCMXCIV&quot;
+<strong>Output:</strong> 1994
+<strong>Explanation:</strong> M = 1000, CM = 900, XC = 90 and IV = 4.</pre>
+const romanMap = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000
+};
+
+function calcVal(s) {
+    var reVal=0;
+    let lastChar='';
+    
+    for (var i=0; i<s.length ; i++) {
+        var c = s[i];
+
+        if (!lastChar) {
+            lastChar = c;
+            reVal = romanMap[c];
+        }
+        else if (lastChar === c) {
+            reVal += romanMap[c];
+        } else if (romanMap[lastChar]< romanMap[c]) {
+            reVal = romanMap[c] - reVal;
+        } else {
+            reVal += romanMap[c];
+            lastChar = c;
+        }
+    }
+      
+    
+    return reVal;
+}
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    let reVal = 0;
+    let storeStr='';
+    let lastChar='';
+    
+    for (var i=0; i<s.length ; i++) {
+        var c = s[i];
+
+        if (!lastChar) {
+            lastChar = c;
+            storeStr += c; 
+        }
+        else if (lastChar === c) {
+           storeStr += c; 
+        } else if (romanMap[lastChar]< romanMap[c]) {
+            storeStr += c; 
+            reVal += calcVal(storeStr);
+            storeStr='';
+            lastChar='';
+        } else {
+            reVal += calcVal(storeStr);
+            storeStr = c; 
+            lastChar = c;
+        }
+    }
+    
+    
+    if (storeStr) {
+        reVal += calcVal(storeStr);
+    }
+    
+    return reVal;
+};
+
+--------------------------------------------
+Question 0020:
+<p>Given a string containing just the characters <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code> and <code>&#39;]&#39;</code>, determine if the input string is valid.</p>
+
+<p>An input string is valid if:</p>
+
+<ol>
+	<li>Open brackets must be closed by the same type of brackets.</li>
+	<li>Open brackets must be closed in the correct order.</li>
+</ol>
+
+<p>Note that an empty string is&nbsp;also considered valid.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;()&quot;
+<strong>Output:</strong> true
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;()[]{}&quot;
+<strong>Output:</strong> true
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;(]&quot;
+<strong>Output:</strong> false
+</pre>
+
+<p><strong>Example 4:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;([)]&quot;
+<strong>Output:</strong> false
+</pre>
+
+<p><strong>Example 5:</strong></p>
+
+<pre>
+<strong>Input:</strong> &quot;{[]}&quot;
+<strong>Output:</strong> true
+</pre>
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    let openArr = [];
+    const mapObj = {
+      '(':  {open:true, type:0},
+      ')':  {open:false, type:0},  
+      '{':  {open:true, type:1},
+      '}':  {open:false, type:1},  
+      '[':  {open:true, type:2},
+      ']':  {open:false, type:2}
+    };
+    for (var i=0; i<s.length; i++){
+        if (mapObj[s.charAt(i)].open) {
+            openArr.push(mapObj[s.charAt(i)]);
+        } else {
+            let lastOpen = openArr.pop();
+            if (!lastOpen || mapObj[s.charAt(i)].type !== lastOpen.type) {
+                return false;
+            }
+            
+        }
+        
+        
+    }
+    
+    return openArr.length===0;
+    
+    
+};
+
+--------------------------------------------
+Question 0026:
+<p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank"><strong>in-place</strong></a> such that each element appear only <em>once</em> and return the new length.</p>
+
+<p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank">in-place</a></strong> with O(1) extra memory.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+Given <em>nums</em> = <strong>[1,1,2]</strong>,
+
+Your function should return length = <strong><code>2</code></strong>, with the first two elements of <em><code>nums</code></em> being <strong><code>1</code></strong> and <strong><code>2</code></strong> respectively.
+
+It doesn&#39;t matter what you leave beyond the returned length.</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+Given <em>nums</em> = <strong>[0,0,1,1,1,2,2,3,3,4]</strong>,
+
+Your function should return length = <strong><code>5</code></strong>, with the first five elements of <em><code>nums</code></em> being modified to&nbsp;<strong><code>0</code></strong>, <strong><code>1</code></strong>, <strong><code>2</code></strong>, <strong><code>3</code></strong>, and&nbsp;<strong><code>4</code></strong> respectively.
+
+It doesn&#39;t matter what values are set beyond&nbsp;the returned length.
+</pre>
+
+<p><strong>Clarification:</strong></p>
+
+<p>Confused why the returned value is an integer but your answer is an array?</p>
+
+<p>Note that the input array is passed in by <strong>reference</strong>, which means modification to the input array will be known to the caller as well.</p>
+
+<p>Internally you can think of this:</p>
+
+<pre>
+// <strong>nums</strong> is passed in by reference. (i.e., without making a copy)
+int len = removeDuplicates(nums);
+
+// any modification to <strong>nums</strong> in your function would be known by the caller.
+// using the length returned by your function, it prints the first <strong>len</strong> elements.
+for (int i = 0; i &lt; len; i++) {
+&nbsp; &nbsp; print(nums[i]);
+}</pre>
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    if (nums.length === 0) {
+        return 0;
+    }
+    
+    let len = nums.length;
+    let i=0,j=1;
+    let temp=nums[0];
+    while (j<nums.length) {
+        if (nums[i] === nums[j]) {
+            len--;
+        } else {
+            i++;
+            nums[i] = nums[j];
+        }
+        
+        j++;
+    }
+    
+  
+    
+    return len;
+};
+
+--------------------------------------------
+Question 0038:
+<p>The count-and-say sequence is the sequence of integers with the first five terms as following:</p>
+
+<pre>
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+</pre>
+
+<p><code>1</code> is read off as <code>&quot;one 1&quot;</code> or <code>11</code>.<br />
+<code>11</code> is read off as <code>&quot;two 1s&quot;</code> or <code>21</code>.<br />
+<code>21</code> is read off as <code>&quot;one 2</code>, then <code>one 1&quot;</code> or <code>1211</code>.</p>
+
+<p>Given an integer <i>n</i>&nbsp;where 1 &le; <em>n</em> &le; 30, generate the <i>n</i><sup>th</sup> term of the count-and-say sequence.</p>
+
+<p>Note: Each term of the sequence of integers will be represented as a string.</p>
+
+<p>&nbsp;</p>
+
+<p><b>Example 1:</b></p>
+
+<pre>
+<b>Input:</b> 1
+<b>Output:</b> &quot;1&quot;
+</pre>
+
+<p><b>Example 2:</b></p>
+
+<pre>
+<b>Input:</b> 4
+<b>Output:</b> &quot;1211&quot;</pre>
+/**
+ * @param {number} n
+ * @return {string}
+ */
+var countAndSay = function(n) {
+    let startVal = '1';
+    if (n===1){
+        return startVal;
+    }
+    return countSt(countAndSay(n-1));
+};
+
+var countSt = function(st){
+    
+    var counting = false;
+    var reSt = '';
+    var countingVal=null, countingCount;
+    for(let j=0; j<st.length; j++){
+        if (countingVal !== null && st.charAt(j)===countingVal){
+            counting=true;
+        } else if (counting && st.charAt(j)!==countingVal){
+            reSt+=countingCount+''+countingVal;
+            counting=false;
+        }
+        
+       // console.log({st,j,reSt});
+        if(!counting){
+            countingVal = st.charAt(j);
+            countingCount = 1;
+            counting=true;
+        } else {
+            countingCount++;
+        }
+        
+        
+        
+    }
+    
+    reSt+=countingCount+''+countingVal;
+    return reSt;
+    
+    
+};
+
+--------------------------------------------
+Question 0042:
+<p>Given <em>n</em> non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.</p>
+
+<p><img src="https://assets.leetcode.com/uploads/2018/10/22/rainwatertrap.png" style="width: 412px; height: 161px;" /><br />
+<small>The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped. <strong>Thanks Marcos</strong> for contributing this image!</small></p>
+
+<p><strong>Example:</strong></p>
+
+<pre>
+<strong>Input:</strong> [0,1,0,2,1,0,1,3,2,1,2,1]
+<strong>Output:</strong> 6</pre>
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var trap = function(height) {
+    if (height.length < 3) {
+        return 0;
+    }
+    let leftWall = [];  
+    let vol = 0;
+    let baseH = 0;
+    height.forEach((h, i) => {
+       if (h === 0){
+           baseH = 0;
+       } else {
+           if (leftWall.length === 0){
+               leftWall.push({h,i});
+           } else {
+
+               let lastH= leftWall[leftWall.length-1];
+               if (h < lastH.h) {
+                   vol += (h-baseH) * (i-lastH.i-1);
+                   leftWall.push({h,i});
+                   baseH = h;
+               } else if (h === lastH.h) {
+                   leftWall.pop();
+                   vol += (lastH.h-baseH) * (i-lastH.i-1);
+                   leftWall.push({h,i});
+               } else { // need to loop back until same or higher wall is found
+                   let stop = false, add = false;
+                   baseH = 0;
+                   while (leftWall.length > 0 && !stop) {
+                       lastH = leftWall[leftWall.length-1];
+                       
+                        if (h < lastH.h) {
+                           leftWall.push({h,i});
+                            vol += (h-baseH) * (i-lastH.i-1);
+                            stop = true;
+                            add = false;
+                       } else if (h === lastH.h) {
+                           leftWall.pop();
+                           vol += (lastH.h-baseH) * (i-lastH.i-1);
+                           leftWall.push({h,i});          
+                           stop = true;
+                           add = false;
+                       } else  { //h > lastH.h
+                            leftWall.pop();
+                            vol += (lastH.h-baseH) * (i-lastH.i-1);
+                            baseH = lastH.h;
+                            add = true;
+                       } 
+                   }
+                   if (add) {
+                       leftWall.push({h,i});  
+                   }
+               }
+           }
+       }
+
+    });
+
+    return vol;
+    
+};
+
+--------------------------------------------
+Question 0050:
+<p>Implement <a href="http://www.cplusplus.com/reference/valarray/pow/" target="_blank">pow(<em>x</em>, <em>n</em>)</a>, which calculates&nbsp;<em>x</em> raised to the power <em>n</em> (x<sup><span style="font-size:10.8333px">n</span></sup>).</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> 2.00000, 10
+<strong>Output:</strong> 1024.00000
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> 2.10000, 3
+<strong>Output:</strong> 9.26100
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> 2.00000, -2
+<strong>Output:</strong> 0.25000
+<strong>Explanation:</strong> 2<sup>-2</sup> = 1/2<sup>2</sup> = 1/4 = 0.25
+</pre>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+	<li>-100.0 &lt; <em>x</em> &lt; 100.0</li>
+	<li><em>n</em> is a 32-bit signed integer, within the range&nbsp;[&minus;2<sup>31</sup>,&nbsp;2<sup>31&nbsp;</sup>&minus; 1]</li>
+</ul>
+/**
+ * @param {number} x
+ * @param {number} n
+ * @return {number}
+ */
+var myPow = function(x, n) {
+    return Math.pow(x,n);
+};
+
+--------------------------------------------
+Question 0066:
+<p>Given a <strong>non-empty</strong> array of digits&nbsp;representing a non-negative integer, plus one to the integer.</p>
+
+<p>The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.</p>
+
+<p>You may assume the integer does not contain any leading zero, except the number 0 itself.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> [1,2,3]
+<strong>Output:</strong> [1,2,4]
+<strong>Explanation:</strong> The array represents the integer 123.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> [4,3,2,1]
+<strong>Output:</strong> [4,3,2,2]
+<strong>Explanation:</strong> The array represents the integer 4321.
+</pre>
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+    // let number = digits.reduce((acc,cur,idx) => acc+cur*Math.pow(10,digits.length-1-idx) , 0);
+    // return ((number++) +'').split('');
+    var done = false;
+    for (var i=digits.length-1; i>=0 && !done; i--){
+        if (digits[i] === 9) {
+            digits[i] = 0;
+        } else {
+            digits[i]++;
+            done = true;
+        }
+    }
+    if (!done) {
+        digits.unshift(1);
+    }
+    
+    return digits;
+    
+};
+
+--------------------------------------------
+Question 0070:
+<p>You are climbing a stair case. It takes <em>n</em> steps to reach to the top.</p>
+
+<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+
+<p><strong>Note:</strong> Given <em>n</em> will be a positive integer.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> 2
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> 3
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+</pre>
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = function(n) {
+    var all=[];
+    all[0]=1;
+    all[1]=2;
+    for(var i=2; i<n; i++){
+        all[i]=all[i-1]+all[i-2];
+    }
+    
+    return all[n-1];
+};
+
+--------------------------------------------
+Question 0121:
+<p>Say you have an array for which the <em>i</em><sup>th</sup> element is the price of a given stock on day <em>i</em>.</p>
+
+<p>If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.</p>
+
+<p>Note that you cannot sell a stock before you buy one.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> [7,1,5,3,6,4]
+<strong>Output:</strong> 5
+<strong>Explanation:</strong> Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+&nbsp;            Not 7-1 = 6, as selling price needs to be larger than buying price.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> [7,6,4,3,1]
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> In this case, no transaction is done, i.e. max profit = 0.
+</pre>
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    let reVal=0;
+    prices.forEach((price,i) => {
+        let sell = Math.max(...prices.slice(i+1));
+        let profit = sell - price;
+        if (profit > reVal){
+            reVal = profit;
+        }
+    });
+    
+    return reVal;
+};
+
+--------------------------------------------
+Question 0167:
+<p>Given an array of integers that is already <strong><em>sorted in ascending order</em></strong>, find two numbers such that they add up to a specific target number.</p>
+
+<p>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</p>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+	<li>Your returned answers (both index1 and index2) are not zero-based.</li>
+	<li>You may assume that each input would have <em>exactly</em> one solution and you may not use the <em>same</em> element twice.</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+
+<pre>
+<strong>Input:</strong> numbers = [2,7,11,15], target = 9
+<strong>Output:</strong> [1,2]
+<strong>Explanation:</strong> The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.</pre>
+/**
+ * @param {number[]} numbers
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(numbers, target) {
+        for (var i=0; i<numbers.length-1; i++) {
+            for (var j=i+1; j<numbers.length; j++) {
+                if (numbers[i] + numbers[j] === target) {
+                    return [i+1,j+1];
+                }
+            }
+        }
+    
+};
+
+--------------------------------------------
+Question 0217:
+<p>Given an array of integers, find if the array contains any duplicates.</p>
+
+<p>Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> [1,2,3,1]
+<strong>Output:</strong> true</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input: </strong>[1,2,3,4]
+<strong>Output:</strong> false</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input: </strong>[1,1,1,3,3,4,3,2,4,2]
+<strong>Output:</strong> true</pre>
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var containsDuplicate = function(nums) {
+    let mapObj={};
+    for (var i=0; i <nums.length; i++ ){
+        if (mapObj[nums[i+'']]) {
+            return true;
+        } else {
+            mapObj[nums[i]+''] = true;
+        }
+    }
+    return false;
+};
+
+--------------------------------------------
+Question 0219:
+<p>Given an array of integers and an integer <i>k</i>, find out whether there are two distinct indices <i>i</i> and <i>j</i> in the array such that <b>nums[i] = nums[j]</b> and the <b>absolute</b> difference between <i>i</i> and <i>j</i> is at most <i>k</i>.</p>
+
+<div>
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input: </strong>nums = <span id="example-input-1-1">[1,2,3,1]</span>, k = <span id="example-input-1-2">3</span>
+<strong>Output: </strong><span id="example-output-1">true</span>
+</pre>
+
+<div>
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input: </strong>nums = <span id="example-input-2-1">[1,0,1,1]</span>, k = <span id="example-input-2-2">1</span>
+<strong>Output: </strong><span id="example-output-2">true</span>
+</pre>
+
+<div>
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input: </strong>nums = <span id="example-input-3-1">[1,2,3,1,2,3]</span>, k = <span id="example-input-3-2">2</span>
+<strong>Output: </strong><span id="example-output-3">false</span>
+</pre>
+</div>
+</div>
+</div>
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ */
+var containsNearbyDuplicate = function(nums, k) {
+    for (let i=0; i<nums.length; i++) {
+        let num = nums[i];        
+        for (j=0; j<k && i+1+j<nums.length ; j++) {
+            if (nums[i+1+j]!==undefined && nums[i+1+j] === num) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+--------------------------------------------
+Question 0220:
+<p>Given an array of integers, find out whether there are two distinct indices <i>i</i> and <i>j</i> in the array such that the <b>absolute</b> difference between <b>nums[i]</b> and <b>nums[j]</b> is at most <i>t</i> and the <b>absolute</b> difference between <i>i</i> and <i>j</i> is at most <i>k</i>.</p>
+
+<div>
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input: </strong>nums = <span id="example-input-1-1">[1,2,3,1]</span>, k = <span id="example-input-1-2">3</span>, t = <span id="example-input-1-3">0</span>
+<strong>Output: </strong><span id="example-output-1">true</span>
+</pre>
+
+<div>
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input: </strong>nums = <span id="example-input-2-1">[1,0,1,1]</span>, k = <span id="example-input-2-2">1</span>, t = <span id="example-input-2-3">2</span>
+<strong>Output: </strong><span id="example-output-2">true</span>
+</pre>
+
+<div>
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input: </strong>nums = <span id="example-input-3-1">[1,5,9,1,5,9]</span>, k = <span id="example-input-3-2">2</span>, t = <span id="example-input-3-3">3</span>
+<strong>Output: </strong><span id="example-output-3">false</span>
+</pre>
+</div>
+</div>
+</div>
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @param {number} t
+ * @return {boolean}
+ */
+var containsNearbyAlmostDuplicate = function(nums, k, t) {
+    for (let i=0; i<nums.length; i++) {
+        let num = nums[i];        
+        for (j=0; j<k && i+1+j<nums.length ; j++) {
+            if (nums[i+1+j]!==undefined && (nums[i+1+j] <= num+t && nums[i+1+j] >= num-t)) {
+                //console.log(num,nums[i+1+j], nums[i+1+j] <= num+t, nums[i+1+j] >= num-t);
+                
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+--------------------------------------------
+Question 0223:
+<p>Find the total area covered by two <strong>rectilinear</strong> rectangles in a <strong>2D</strong> plane.</p>
+
+<p>Each rectangle is defined by its bottom left corner and top right corner as shown in the figure.</p>
+
+<p><img alt="Rectangle Area" src="https://assets.leetcode.com/uploads/2018/10/22/rectangle_area.png" style="width: 542px; height: 304px;" /></p>
+
+<p><strong>Example:</strong></p>
+
+<pre>
+<strong>Input: </strong>A = <span id="example-input-1-1">-3</span>, B = <span id="example-input-1-2">0</span>, C = <span id="example-input-1-3">3</span>, D = <span id="example-input-1-4">4</span>, E = <span id="example-input-1-5">0</span>, F = <span id="example-input-1-6">-1</span>, G = <span id="example-input-1-7">9</span>, H = <span id="example-input-1-8">2</span>
+<strong>Output: </strong><span id="example-output-1">45</span></pre>
+
+<p><strong>Note:</strong></p>
+
+<p>Assume that the total area is never beyond the maximum possible value of <strong>int</strong>.</p>
+/**
+ * @param {number} A
+ * @param {number} B
+ * @param {number} C
+ * @param {number} D
+ * @param {number} E
+ * @param {number} F
+ * @param {number} G
+ * @param {number} H
+ * @return {number}
+ */
+var computeArea = function(A, B, C, D, E, F, G, H) {
+    const area1 = (C-A) * (D-B);
+    const area2 = (G-E) * (H-F);
+    
+   // console.log({area1,area2});
+    
+    let commonArea = 0;
+    
+    //W,X,Y,Z
+    let W = Math.max(A,E);
+    let X = Math.max(B,F);
+    let Y = Math.min(C,G);
+    let Z = Math.min(D,H);    
+
+  //  console.log({W,X,Y,Z});
+    
+    
+    if ((W<Y && X<Z) && ((W>=A && W<=C) || (X>=F && X<=H))){
+        commonArea = (Y-W) * (Z-X); 
+    }
+    
+    return area1 + area2 - commonArea;
+    
+};
+
+--------------------------------------------
+Question 0698:
+<p>Given an array of integers <code>nums</code> and a positive integer <code>k</code>, find whether it&#39;s possible to divide this array into <code>k</code> non-empty subsets whose sums are all equal.</p>
+
+<p>&nbsp;</p>
+
+<p><b>Example 1:</b></p>
+
+<pre>
+<b>Input:</b> nums = [4, 3, 2, 3, 5, 2, 1], k = 4
+<b>Output:</b> True
+<b>Explanation:</b> It&#39;s possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
+</pre>
+
+<p>&nbsp;</p>
+
+<p><b>Note:</b></p>
+
+<ul>
+	<li><code>1 &lt;= k &lt;= len(nums) &lt;= 16</code>.</li>
+	<li><code>0 &lt; nums[i] &lt; 10000</code>.</li>
+</ul>
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ */
+var canPartitionKSubsets = function(nums, k) {
+    nums.sort((a,b)=>(b-a));
+    let sum = nums.reduce((total, num)=>(total+num), 0);
+    if (!Number.isInteger(sum / k)) { return false; }
+    let eachSum = sum / k;
+    let bucket = Array(k);
+    bucket.fill(0,0);
+    return checkPossible(nums, bucket, eachSum);
+};
+
+var checkPossible = function(sumList, bucketList, eachSum) {
+    if (sumList.length == 0) {
+        return true;
+    }
+    let tryNum = sumList[0];
+    for (var i = 0; i < bucketList.length; i++) {
+        let success = false;
+        if (bucketList[i]+tryNum <= eachSum) {
+            let newBucketList = bucketList.slice();
+            newBucketList[i]+=tryNum;
+            success = checkPossible(sumList.slice(1),newBucketList, eachSum);
+        }
+        if (success) {
+            return true;
+        }
+    }
+    return false;
+}
+
+--------------------------------------------
+

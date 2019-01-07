@@ -60,6 +60,3 @@ typings/
 
 # Project specific excludes
 config.json
-problem
-submission
-leetcode.txt

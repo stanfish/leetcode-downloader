@@ -53,7 +53,7 @@ if (!fs.existsSync(dataPath)) {
     // .filter(({ id }) => downloadAll || !exclude.includes(id))
     .sort((a, b) => a.id - b.id);
 
-  console.log('problems', problems);
+  console.log(problems.length, ' problems');
 
   for (let i = 0; i < problems.length; i++) {
     const problem = problems[i];
