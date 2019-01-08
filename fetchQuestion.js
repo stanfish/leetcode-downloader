@@ -85,7 +85,9 @@ if (!fs.existsSync(dataPath)) {
       }
     }`;
 
-  problems.forEach(async (problem) => {
+  for (let i = 0; i < problems.length; i++) {
+    const problem = problems[i];
+    // problems.forEach(async (problem) => {
     const { id, slug } = problem;
     const idStr = numberPadZero(id, 4);
     const filename = `${idStr}-${slug}.txt`;
@@ -109,5 +111,5 @@ if (!fs.existsSync(dataPath)) {
     }
 
     await sleep(SLEEP_TIME);
-  });
+  }
 })();
