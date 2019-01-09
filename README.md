@@ -34,6 +34,18 @@ $ node fetchQuestion.js
 $ node mergeQA.js
 ```
 
+
+## Daily Cron Job
+### Script the run daily or weekly to update the questions and submissions to github repository
+
+`crontab -e`
+
+Add
+
+`0 6 * * * /PATH/script/dailyScript.sh`
+
+
+
 ## License
 
 MIT
