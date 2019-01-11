@@ -1,6 +1,6 @@
 # LeetCode Downloader
 
-Download your accepted submissions and questions from LeetCode!
+Download your accepted submissions and questions from LeetCode
 
 This repo refers to [noootown/leetcode-downloader](https://github.com/noootown/leetcode-downloader) with some fixes, graphql endpoint update and eslint.
 
