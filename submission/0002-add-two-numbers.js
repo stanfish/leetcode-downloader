@@ -12,23 +12,23 @@
  */
 var addTwoNumbers = function(l1, l2) {
     
-    var tempL1 = l1;
-    var tempL2 = l2;
-    var l3, tempL3;
-    var carry = false;
+    let tempL1 = l1;
+    let tempL2 = l2;
+    let l3, tempL3;
+    let carry = false;
     while (tempL1 !== null || tempL2 !== null){
         
-        var val1 = tempL1 === null ? 0 : tempL1.val;
+        let val1 = tempL1 === null ? 0 : tempL1.val;
         if (tempL1 !== null ){
             tempL1 = tempL1.next;
         }
         
-        var val2 = tempL2 === null ? 0 : tempL2.val;
+        let val2 = tempL2 === null ? 0 : tempL2.val;
         if (tempL2 !== null ){
             tempL2 = tempL2.next;
         }
         
-        var val3 = val1 + val2 + (carry ? 1 : 0);
+        let val3 = val1 + val2 + (carry ? 1 : 0);
         if (val3 >= 10) {
             val3 -= 10;
             carry = true;
@@ -36,7 +36,7 @@ var addTwoNumbers = function(l1, l2) {
             carry = false;
         }
         
-        var newNode = new ListNode(val3);
+        let newNode = new ListNode(val3);
         
         if (!l3) {
             l3 = newNode;

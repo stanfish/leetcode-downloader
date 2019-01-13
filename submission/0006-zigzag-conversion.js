@@ -7,7 +7,7 @@ var convert = function(s, numRows) {
     if (numRows === 1) {
         return s;
     }
-    var rows = [];
+    let rows = [];
     for (var i=0; i<numRows; i++) {
         rows.push('');
     }
