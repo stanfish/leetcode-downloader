@@ -91,6 +91,9 @@ if (!fs.existsSync(dataPath)) {
     const { id, slug } = problem;
     const idStr = numberPadZero(id, 4);
     const filename = `${idStr}-${slug}.txt`;
+    //    if (fs.existsSync(`${dataPath}/${filename}`)) {
+    //      console.log(`File ${filename} exists: skipping`);
+    //    } else {
     console.log(`Downloading ${slug}`);
     const { data: { data: { question: { content } } } } = await request({
       url: 'https://leetcode.com/graphql',
@@ -109,7 +112,7 @@ if (!fs.existsSync(dataPath)) {
       console.log(`Error in writing file ${filename}`);
       console.log(err);
     }
-
+    //    }
     await sleep(SLEEP_TIME);
   }
 })();

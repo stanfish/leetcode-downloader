@@ -1,4 +1,4 @@
-cd /home/pi/code/leetcode-downloader/
+cd /home/pi/dev/leetcode-downloader/
 git checkout develop
 node fetchSubmission.js
 node fetchQuestion.js
