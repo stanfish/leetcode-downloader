@@ -10,8 +10,8 @@
 <strong>Input: </strong>str1 = <span id="example-input-1-1">&quot;abac&quot;</span>, str2 = <span id="example-input-1-2">&quot;cab&quot;</span>
 <strong>Output: </strong><span id="example-output-1">&quot;cabac&quot;</span>
 <strong>Explanation: </strong>
-str1 = &quot;abac&quot; is a substring of &quot;cabac&quot; because we can delete the first &quot;c&quot;.
-str2 = &quot;cab&quot; is a substring of &quot;cabac&quot; because we can delete the last &quot;ac&quot;.
+str1 = &quot;abac&quot; is a subsequence of &quot;cabac&quot; because we can delete the first &quot;c&quot;.
+str2 = &quot;cab&quot; is a subsequence of &quot;cabac&quot; because we can delete the last &quot;ac&quot;.
 The answer provided is the shortest such string that satisfies these properties.
 </pre>
 
