@@ -2,6 +2,8 @@
 
 <p>A <em>subsequence</em> of a string is a new string generated from the original string with some characters(can be none) deleted without changing the relative order of the remaining characters. (eg, &quot;ace&quot; is a subsequence of &quot;abcde&quot; while &quot;aec&quot; is not).&nbsp;A <em>common subsequence</em>&nbsp;of two strings is a subsequence that is common to both strings.</p>
 
+<p>&nbsp;</p>
+
 <p>If there is no common subsequence, return 0.</p>
 
 <p>&nbsp;</p>
