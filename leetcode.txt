@@ -12,6 +12,7 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[<strong>0</strong>] + nums[<strong>1</strong>] = 2 + 7 = 9,
 return [<strong>0</strong>, <strong>1</strong>].
 </pre>
+
 /**
  * @param {number[]} nums
  * @param {number} target
@@ -382,6 +383,7 @@ Question 0011:
 <pre>
 <strong>Input:</strong> [1,8,6,2,5,4,8,3,7]
 <strong>Output:</strong> 49</pre>
+
 /**
  * @param {number[]} height
  * @return {number}
@@ -777,6 +779,7 @@ int len = removeDuplicates(nums);
 for (int i = 0; i &lt; len; i++) {
 &nbsp; &nbsp; print(nums[i]);
 }</pre>
+
 /**
  * @param {number[]} nums
  * @return {number}

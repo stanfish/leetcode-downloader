@@ -12,6 +12,9 @@
 	</li>
 </ul>
 
+<br>
+<img src="https://assets.leetcode.com/uploads/2019/10/20/hint_valid_mountain_array.png" width="500" />
+
 <p>&nbsp;</p>
 
 <p><strong>Example 1:</strong></p>
