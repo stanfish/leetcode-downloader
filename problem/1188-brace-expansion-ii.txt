@@ -57,7 +57,7 @@
 <p><strong>Constraints:</strong></p>
 
 <ol>
-	<li><code>1 &lt;= expression.length &lt;= 50</code></li>
+	<li><code>1 &lt;= expression.length &lt;= 60</code></li>
 	<li><code>expression[i]</code> consists of <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;,&#39;</code>or lowercase English letters.</li>
 	<li>The given&nbsp;<code>expression</code>&nbsp;represents a set of words based on the grammar given in the description.</li>
 </ol>
