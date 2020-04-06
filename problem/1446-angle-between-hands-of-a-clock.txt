@@ -1,4 +1,4 @@
-<p>Given two numbers, <code>hour</code> and <code>minutes</code>. Return the smaller angle (in sexagesimal units) formed between the <code>hour</code> and the <code>minute</code> hand.</p>
+<p>Given two numbers, <code>hour</code> and <code>minutes</code>. Return the smaller angle (in degrees) formed between the <code>hour</code> and the <code>minute</code> hand.</p>
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
