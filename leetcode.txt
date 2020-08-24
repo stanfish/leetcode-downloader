@@ -967,35 +967,38 @@ var trap = function(height) {
 
 --------------------------------------------
 Question 0050:
-<p>Implement <a href="http://www.cplusplus.com/reference/valarray/pow/" target="_blank">pow(<em>x</em>, <em>n</em>)</a>, which calculates&nbsp;<em>x</em> raised to the power <em>n</em> (x<sup><span style="font-size:10.8333px">n</span></sup>).</p>
+<p>Implement <a href="http://www.cplusplus.com/reference/valarray/pow/" target="_blank">pow(<em>x</em>, <em>n</em>)</a>, which calculates&nbsp;<em>x</em> raised to the power <em>n</em> (i.e. x<sup><span style="font-size:10.8333px">n</span></sup>).</p>
 
+<p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 
 <pre>
-<strong>Input:</strong> 2.00000, 10
+<strong>Input:</strong> x = 2.00000, n = 10
 <strong>Output:</strong> 1024.00000
 </pre>
 
 <p><strong>Example 2:</strong></p>
 
 <pre>
-<strong>Input:</strong> 2.10000, 3
+<strong>Input:</strong> x = 2.10000, n = 3
 <strong>Output:</strong> 9.26100
 </pre>
 
 <p><strong>Example 3:</strong></p>
 
 <pre>
-<strong>Input:</strong> 2.00000, -2
+<strong>Input:</strong> x = 2.00000, n = -2
 <strong>Output:</strong> 0.25000
 <strong>Explanation:</strong> 2<sup>-2</sup> = 1/2<sup>2</sup> = 1/4 = 0.25
 </pre>
 
-<p><strong>Note:</strong></p>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
 
 <ul>
-	<li>-100.0 &lt; <em>x</em> &lt; 100.0</li>
-	<li><em>n</em> is a 32-bit signed integer, within the range&nbsp;[&minus;2<sup>31</sup>,&nbsp;2<sup>31&nbsp;</sup>&minus; 1]</li>
+	<li><code>-100.0 &lt;&nbsp;x&nbsp;&lt; 100.0</code></li>
+	<li><code>-2<sup>31</sup>&nbsp;&lt;= n &lt;=&nbsp;2<sup>31</sup>-1</code></li>
+	<li><code>-10<sup>4</sup> &lt;= x<sup>n</sup> &lt;= 10<sup>4</sup></code></li>
 </ul>
 /**
  * @param {number} x
@@ -1014,10 +1017,11 @@ Question 0066:
 
 <p>You may assume the integer does not contain any leading zero, except the number 0 itself.</p>
 
+<p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 
 <pre>
-<strong>Input:</strong> [1,2,3]
+<strong>Input:</strong> digits = [1,2,3]
 <strong>Output:</strong> [1,2,4]
 <strong>Explanation:</strong> The array represents the integer 123.
 </pre>
@@ -1025,10 +1029,25 @@ Question 0066:
 <p><strong>Example 2:</strong></p>
 
 <pre>
-<strong>Input:</strong> [4,3,2,1]
+<strong>Input:</strong> digits = [4,3,2,1]
 <strong>Output:</strong> [4,3,2,2]
 <strong>Explanation:</strong> The array represents the integer 4321.
 </pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> digits = [0]
+<strong>Output:</strong> [1]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= digits.length &lt;= 100</code></li>
+	<li><code>0 &lt;= digits[i] &lt;= 9</code></li>
+</ul>
 /**
  * @param {number[]} digits
  * @return {number[]}
